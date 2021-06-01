@@ -58,11 +58,13 @@ abstract class ModelParent
      * @param int $id
      * @return mixed
      */
-    public function getOne(int $id)
+    public function getOne($id)
     {
         try {
 //            $this->id=$id;??
-            $requete = $this->dbRecord->prepare('SELECT * FROM' . $this->table . 'WHERE ' . $this->table . '_id = :id');
+            $requete = $this->dbRecord->prepare('SELECT * FROM record.' . $this->table . ' INNER JOIN record.artist ON disc.artist_id=artist.artist_id WHERE ' .$this->table.".". $this->table . '_id = :id');
+//            $requete = $this->dbRecord->prepare('SELECT * FROM  record.disc WHERE disc_id = :id');
+
             $requete->bindValue(':id', $id, PDO::PARAM_INT);
             $requete->execute();
             $resultat = $requete->fetch(PDO::FETCH_OBJ);

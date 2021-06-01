@@ -12,13 +12,19 @@ class Disques extends AbstractController
         //charge le model via chargermodel dans abstractcontroller
         $disques=$this->chargerModel('Disc');
         //utilise la fonction getAll faite dans modelparent qui est étendue par le model/disc
-        $listedisques = $disques->getAll();
+        $listedisques = $disques->disqueParArtiste();
         $this->afficher('listeDisques',[
             'disques'=>$listedisques
         ]);
+    }
 
-
-
-
+    public function detailsDisques($id){
+        $disque=$this->chargerModel('Disc');
+        $detaildisque=$disque->getOne($id);
+//        var_dump($detaildisque);
+//        die;
+        $this->afficher('detailsDisques',[
+            'details'=>$detaildisque
+        ]);
     }
 }

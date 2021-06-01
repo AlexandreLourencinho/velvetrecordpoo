@@ -40,6 +40,7 @@ if ($parametres[1] != '') {
             unset($parametres[0]);
             unset($parametres[1]);
             unset($parametres[2]);
+            var_dump($parametres);
             // equivalent ici de $classe->$methode($parametre);
             call_user_func([$classe, $methode], $parametres);
 

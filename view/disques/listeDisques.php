@@ -25,8 +25,8 @@ var_dump($disques);
             <td><?= $disque->disc_year ?></td>
             <td><?= $disque->disc_label ?></td>
             <td><?= $disque->disc_genre ?></td>
-            <td><?= $disque->artist_id ?></td>
-            <td><a href="" class="btn btn-info">Détails</a></td>
+            <td><?= $disque->artist_name ?></td>
+            <td><a href="detailsDisques/<?= $disque->disc_id?>" class="btn btn-info">Détails</a></td>
         </tr>
         <?php
         } ?>
