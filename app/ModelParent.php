@@ -3,12 +3,19 @@
 
 abstract class ModelParent
 {
-    private $host = "127.0.0.1:3308";
-    private $dbname = "record";
-    private $user = "root";
-    private $mdp = "1234";
-    private $charset = "utf8";
-    private $dbRecord;
+
+    //infos de connexion à la bdd
+    private string $host = "127.0.0.1:3308";
+    private string $dbname = "record";
+    private string $user = "root";
+    private string $mdp = "1234";
+    private string $charset = "utf8";
+
+    //connexion à la bdd en protégé pour être utilisé par éléments enfants
+    protected $dbRecord;
+
+    public string $table;
+    public string $id;
 
 
     /**
@@ -16,6 +23,7 @@ abstract class ModelParent
      */
     public function getConnexion()
     {
+        $this->dbRecord=null;
         try {
             $dsn = "mysql:host=$this->host,dbname=$this->dbname,charset=$this->charset";
             $this->dbRecord = new PDO($dsn, $this->user, $this->mdp);
@@ -34,7 +42,8 @@ abstract class ModelParent
     public function getAll()
     {
         try {
-            $requete = $this->dbRecord->query('SELECT * FROM' . $this->table);
+            $requete = $this->dbRecord->prepare('SELECT * FROM record.' . $this->table);
+            $requete->execute();
             return $requete->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $message) {
             echo $message->getCode() . "<br>";

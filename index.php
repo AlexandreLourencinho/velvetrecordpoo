@@ -9,6 +9,7 @@ var_dump($_SERVER['REQUEST_URI']);
 //recupère le root du projet et le stocke dans la constante ROOT
 define('ROOT', $_SERVER['DOCUMENT_ROOT'] . "\\");
 require_once ROOT . "app/AbstractController.php";
+require_once ROOT . 'app/ModelParent.php';
 var_dump(ROOT);
 //recupère et stocke l'uri
 $uri = $_SERVER['REQUEST_URI'];

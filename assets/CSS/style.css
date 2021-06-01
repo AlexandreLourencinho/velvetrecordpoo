@@ -1,0 +1,83 @@
+/* utile pour le resize*/
+html {
+    min-height: 100% !important;
+}
+
+/*couleur du survol des liens*/
+a.text-info:hover {
+    color: aliceblue !important;
+}
+
+/*taille des images*/
+img {
+    width: 50% !important;
+}
+
+/*gestion des bordures*/
+.border-lg-none {
+    border-style: none !important;
+}
+
+/*taille du texte des "cartes"*/
+.potitext {
+    font-size: small;
+}
+
+/*navbar en noir opacité 80% */
+nav.navbar-light {
+    background-color: black !important;
+    border-style: solid !important;
+    border-bottom-color: aliceblue !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+/*opacité a 60%*/
+div.bg-dark {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/*fond du footer transparent*/
+footer.bleh {
+    background: rgba(0, 0, 0, 0) !important;
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+}
+/*div.fondopac{*/
+/*    background: rgba(0,0,0,0.6);*/
+/*}*/
+label.fondopac{
+    background: rgba(0,0,0,0.5);
+}
+
+/*image de fond du body + grille verticale pour que la page soit prise entièrement et pas avoir un footer au milieu de la page*/
+body {
+    background-image: url("../../../view/assets/images/fondecran.png");
+    background-size: cover !important;
+    min-height: 100vh !important;
+    display: grid !important;
+    grid-template-rows: auto 1fr auto !important;
+
+}
+
+/*média queries*/
+@media screen and (max-width: 568px) {
+    div.bla {
+        min-height: 100px;
+        height: 100% !important;
+        overflow: hidden;
+    }
+
+    /*bordures quand taille réduite*/
+    .border-lg-none {
+        border-style: solid !important;
+    }
+
+    div.h {
+        height: 120%;
+    }
+
+    /*taille des polices du footer*/
+    u.footitre {
+        font-size: 1.25rem !important;
+    }
+}

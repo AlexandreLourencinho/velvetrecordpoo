@@ -3,6 +3,16 @@
 //abstract class = on ne peut pas faire new classe pour l'instancier : elle ne sera que dépendante d'une classe fille
 abstract class AbstractController
 {
+    //fonction qui sert a appeler les model correspondants
+    public function chargerModel(string $model){
+        require_once ROOT . "model/" . $model . ".php";
+        return new $model;
+    }
+
+
+
+
+
     public function afficher(string $fichier, array $donnees = []){
     //mettre = [] dans les paramètres de la fonction veut dire qu'il PEUT être absent
 
