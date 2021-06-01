@@ -18,10 +18,12 @@ abstract class AbstractController
         require_once ROOT . "view/" . strtolower(get_class($this)) ."/". $fichier . ".php";
         $contenu = ob_get_clean();
         var_dump($contenu);
-//        die;
+        //require a chaque fois le corps de la page aka le header et footer
         require_once ROOT . "view/template/corps.php";
 
     }
+
+
 
 
 
