@@ -3,10 +3,9 @@
 //abstract class = on ne peut pas faire new classe pour l'instancier : elle ne sera que dépendante d'une classe fille
 abstract class AbstractController
 {
-
-
     public function afficher(string $fichier, array $donnees = []){
-    //mettre = null dans les paramètres de la fonction veut dire qu'il PEUT être absent
+    //mettre = [] dans les paramètres de la fonction veut dire qu'il PEUT être absent
+
         // le extract prends les données du tableau $donnees et génère des variables a partir des clefs du tableau
         // qui auront comme valeur les values du tableau
         extract($donnees);

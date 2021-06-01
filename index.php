@@ -8,7 +8,7 @@ var_dump($_SERVER['REQUEST_URI']);
 
 //recupère le root du projet et le stocke dans la constante ROOT
 define('ROOT', $_SERVER['DOCUMENT_ROOT'] . "\\");
-require_once ROOT."app/AbstractController.php";
+require_once ROOT . "app/AbstractController.php";
 var_dump(ROOT);
 //recupère et stocke l'uri
 $uri = $_SERVER['REQUEST_URI'];
@@ -50,6 +50,11 @@ if ($parametres[1] != '') {
         http_response_code(404);
         echo 'erreur 404 : ntm la classe demandée n\'existe pas';
     }
+} else {
+    require ROOT . 'controller/Accueil.php';
+    $accueil = new Accueil();
+//    header('location: Accueil/pageAccueil');
+    call_user_func_array([$accueil, 'pageAccueil'], $parametres);
 }
 
 
