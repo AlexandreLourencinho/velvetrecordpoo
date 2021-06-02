@@ -5,8 +5,13 @@ abstract class AbstractController
 {
     //fonction qui sert a appeler les model correspondants
     public function chargerModel(string $model){
-        require_once ROOT . "model/" . $model . ".php";
+        require_once ROOT . "/model/" . $model . ".php";
         return new $model;
+    }
+
+    public function chargerFonction(string $fonction){
+        require_once ROOT . "/fonction/" . $fonction . ".php";
+        return new $fonction;
     }
 
 
@@ -24,11 +29,11 @@ abstract class AbstractController
         // permet de démarrer un buffer et de le stocker plus tard dans une variable (ici $contenu)
         ob_start();
         //le getclass $this , le $^this sera la classe ou est appelée cette méthode
-        require_once ROOT . "view/" . strtolower(get_class($this)) ."/". $fichier . ".php";
+        require_once ROOT . "/view/" . strtolower(get_class($this)) ."/". $fichier . ".php";
         $contenu = ob_get_clean();
-        var_dump($contenu);
+//        var_dump($contenu);
         //require a chaque fois le corps de la page aka le header et footer
-        require_once ROOT . "view/template/corps.php";
+        require_once ROOT . "/view/template/corps.php";
 
     }
 

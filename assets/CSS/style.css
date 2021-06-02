@@ -9,8 +9,16 @@ a.text-info:hover {
 }
 
 /*taille des images*/
-img {
+img.coverimage {
     width: 50% !important;
+}
+
+img{
+    width :100% !important;
+}
+
+td{
+    background-color: rgba(0,0,0,0.8) !important;
 }
 
 /*gestion des bordures*/
@@ -24,11 +32,11 @@ img {
 }
 
 /*navbar en noir opacité 80% */
-nav.navbar-light {
+nav.navbar-dark {
     background-color: black !important;
     border-style: solid !important;
     border-bottom-color: aliceblue !important;
-    background: rgba(0, 0, 0, 0.8) !important;
+    background: rgba(0, 0, 0, 0.7) !important;
 }
 
 /*opacité a 60%*/
@@ -51,7 +59,7 @@ label.fondopac{
 
 /*image de fond du body + grille verticale pour que la page soit prise entièrement et pas avoir un footer au milieu de la page*/
 body {
-    background-image: url("../../../view/assets/images/fondecran.png");
+    background-image: url("/assets/images/fondecran.png");
     background-size: cover !important;
     min-height: 100vh !important;
     display: grid !important;

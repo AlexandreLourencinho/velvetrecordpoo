@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="../../assets/CSS/style.css">
+    <!--    lien de mon potifavicon-->
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="/favicon.ico">
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +17,7 @@
     <!--    navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="d-flex flex-row">
-            <a class="navbar-brand text-light" href="/index.php" title="lien vers l'accueil de Velvet Record"><i
+            <a class="navbar-brand text-light" href="/" title="lien vers l'accueil de Velvet Record"><i
                         class="fas fa-home"></i> Accueil</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +26,7 @@
             <div class="collapse navbar-collapse mr-1" id="navbarNav">
                 <ul class="navbar-nav">
                     <li>
-                        <a class="nav-link text-light" href="/view/liste_disques.php"
+                        <a class="nav-link text-light" href="/disques/listeDisques"
                            title="Accès à la liste des diques"><i class="fas fa-compact-disc"></i> liste des disques</a>
                     </li>
                 </ul>
@@ -32,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li>
-                            <a class="nav-link text-light" href="/view/connexion.php"
+                            <a class="nav-link text-light" href="#"
                                title="Accès à la liste des diques"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
                         </li>
                     </ul>
@@ -40,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li>
-                            <a class="nav-link text-light" href="/view/creation_compte.php"
+                            <a class="nav-link text-light" href="#"
                                title="Accès à la liste des diques"><i class="fas fa-user-circle"></i> Créer un
                                 compte</a>
                         </li>
@@ -49,11 +51,17 @@
         </div>
     </nav>
 </header>
+<!--les container et d-flex-->
+<div class="container-fluid">
+    <div class="d-md-flex justify-content-center">
+
 
 
 <?= $contenu ?>
 
-
+        <!--fermeture des div ouvertes dans le header-->
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
