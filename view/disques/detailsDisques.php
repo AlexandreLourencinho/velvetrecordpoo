@@ -66,7 +66,7 @@
             <!--            liens vers les pages modifier ou supprimer (et retour ) -->
             <a href="/disques/form_modif/<?= $details->disc_id ?>" class="btn btn-outline-warning me-1"
                title="retour à la liste des disques">modifier</a>
-            <a href="/disques/supprimer_disque/<?= $details->disc_id ?>" class="btn btn-danger ms-1 me-1"
+            <a href="/disques/supdisque/<?= $details->disc_id ?>" class="btn btn-danger ms-1 me-1"
                title="retour à la liste des disques">supprimer</a>
             <a href="/disques/listeDisques" class="btn btn-outline-info ms-1"
                title="retour à la liste des disques">Retour</a>

@@ -1,5 +1,7 @@
-
-<form action="#"
+<?php
+if($aff===false){
+?>
+<form action="/disques/form_modif/<?= $disqueDetail->disc_id ?>"
       class="form-group col-12 col-md-10 d-flex flex-column align-items-start justify-content-start mb-3" method="post"
       enctype="multipart/form-data" id="formmodif">
     <p class="h3 text-center text-light">Modification de <?= $disqueDetail->disc_title ?> de <?= $disqueDetail->artist_name ?></p>
@@ -70,9 +72,23 @@
     <!--        boutons submit retour aux détails etc-->
     <div class="justify-content-center col">
         <button type="submit" name="envoi" id="envoi" class="btn btn-outline-warning" title="confirmer la modification de <?= $disqueDetail->disc_title ?>">Modifier</button>
-        <input type="hidden" value="<?= $disqueDetail->disc_id ?>" name="disc_id">
         <a href="/disques/detailsDisques/<?= $disqueDetail->disc_id ?>" class="btn btn-outline-info" title="retour aux détails du disque <?= $disqueDetail->disc_title ?>">Retour aux
             détails du disque</a>
         <a href="/disques/listeDisques" class="btn btn-outline-light" title="retour à la liste des disques">Retour à la liste des disques</a>
     </div>
 </form>
+
+<?php
+}
+elseif($aff===true){
+    ?>
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="alert alert-success"> Modification réussie</h1>
+        <a href="/" class="btn btn-outline-info" title="retournez à la liste des disques">Retour à la liste des disques</a>
+        <p class="text-light">Vous allez être redirigé dans <span id="compteur">5</span> secondes...</p>
+    </div>
+    <script src="/assets/javaScript/scripts.js"></script>
+    <?php
+    header("refresh: 5; url=/disques/listeDisques");
+}
+?>

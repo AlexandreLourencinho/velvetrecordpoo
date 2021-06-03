@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../assets/CSS/style.css">
     <!--    lien de mon potifavicon-->
     <link rel="icon" type="image/x-icon" sizes="16x16" href="/favicon.ico">
-    <title>Document</title>
+    <title><?= $titre ?></title>
 </head>
 <body>
 <header class="sticky-top">

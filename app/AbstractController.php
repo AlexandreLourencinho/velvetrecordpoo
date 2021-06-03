@@ -31,6 +31,7 @@ abstract class AbstractController
         //le getclass $this , le $^this sera la classe ou est appelée cette méthode
         require_once ROOT . "/view/" . strtolower(get_class($this)) ."/". $fichier . ".php";
         $contenu = ob_get_clean();
+        $titre =$fichier." de velvet record";
 //        var_dump($contenu);
         //require a chaque fois le corps de la page aka le header et footer
         require_once ROOT . "/view/template/corps.php";

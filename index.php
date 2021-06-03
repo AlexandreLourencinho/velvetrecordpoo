@@ -1,4 +1,7 @@
 <?php
+session_start();
+//$_SESSION['login']='alex';
+var_dump($_SESSION);
 //rooter qui permet d'aller dans tel ou tel controller ou methode
 
 
@@ -37,6 +40,7 @@ if ($parametres[1] != '') {
 
         if (method_exists($classe, $methode)) {
             // unset le 0 1 et 2 pour ne pas passer le nom de la classe et de la methode en paramètre
+
             unset($parametres[0]);
             unset($parametres[1]);
             unset($parametres[2]);

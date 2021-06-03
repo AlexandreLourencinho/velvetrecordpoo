@@ -1,5 +1,5 @@
 <?php
-//var_dump($resultat);
+if($aff===false){
 ?>
 
 <form enctype="multipart/form-data" action="/disques/form_ajout" method="post"
@@ -45,6 +45,22 @@
 <div class="mt-3">
     <!--            boutons envoyer et retour-->
     <button type="submit" class="btn btn-success" name="envoi" id="envoi">Envoyer</button>
-    <a href="/view/liste_disques.php" class="btn btn-info">Retour</a>
+    <a href="/disques/listeDisques" class="btn btn-info">Retour</a>
 </div>
 </form>
+
+<?php
+}elseif($aff===true){
+    ?>
+
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="alert alert-success"> Bien ajouté à la bdd</h1>
+        <a href="/disques/listeDisques" class="btn btn-info">Retour à la liste des disques</a>
+        <p>Vous allez être redirigé dans <span id="compteur">5</span> secondes...</p>
+    </div>
+    <!--    appel du script du compteur-->
+    <script src="/assets/javaScript/scripts.js"></script>
+    <?php
+    header("refresh: 5; url=/disques/listeDisques");
+}
+    ?>
