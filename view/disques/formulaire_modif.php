@@ -1,4 +1,7 @@
 <?php
+if($disqueDetail===false){
+    header('location: /disques/listeDisques');
+}
 if($aff===false){
 ?>
 <form action="/disques/form_modif/<?= $disqueDetail->disc_id ?>"

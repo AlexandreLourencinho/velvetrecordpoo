@@ -5,7 +5,7 @@ abstract class ModelParent
 {
 
     //infos de connexion à la bdd
-    private string $host = "127.0.0.1:3308";
+    private string $host = "127.0.0.1:3306";
     private string $dbname = "record";
     private string $user = "root";
     private string $mdp = "1234";

@@ -1,6 +1,7 @@
 <?php
-//echo 'prout';
-//var_dump($details);
+if($details===false){
+    header('location: /disques/listeDisques');
+}
 ?>
     <!--début du formulaire-->
     <form action="#" class="form-group col-12 col-md-10 d-flex flex-column align-items-start justify-content-start">
