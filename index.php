@@ -1,7 +1,5 @@
 <?php
 session_start();
-//$_SESSION['login']='alex';
-//var_dump($_SESSION);
 
 
 //rooter qui permet d'aller dans tel ou tel controller ou methode

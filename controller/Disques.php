@@ -41,6 +41,9 @@ class Disques extends AbstractController
      */
     public function form_ajout()
     {
+        if(!isset($_SESSION['nom'])){
+            header('location: /utilisateurs/formulaire_connexion');
+        }
         if (!isset($_POST['envoi'])) {
             $artiste = $this->chargerModel('Artist');
             $truc = $artiste->listeArtiste();
@@ -138,6 +141,9 @@ class Disques extends AbstractController
      */
     public function form_modif($id)
     {
+        if(!isset($_SESSION['nom'])){
+            header('location: /utilisateurs/formulaire_connexion');
+        }
         // variable utilisée pour l'affichage
         $aff = false;
 
@@ -267,6 +273,9 @@ class Disques extends AbstractController
      */
     public function supdisque($id)
     {
+        if(!isset($_SESSION['nom'])){
+            header('location: /utilisateurs/formulaire_connexion');
+        }
         if (!isset($_POST['envoi'])) {
             $disque = $this->chargerModel('Disc');
             $disqueuh = $disque->getOne($id);

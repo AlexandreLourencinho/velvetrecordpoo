@@ -1,7 +1,7 @@
 <?php
 
 
-class utilisateur extends ModelParent
+class Utilisateur extends ModelParent
 {
 
     /**
@@ -15,6 +15,8 @@ class utilisateur extends ModelParent
         $this->getConnexion();
     }
 
+
+
     /**
      * creation de compte utilisateur
      * @return array
@@ -22,9 +24,9 @@ class utilisateur extends ModelParent
     public function ajoutUtilisateur()
     {
         $requete = $this->dbRecord->prepare('INSERT INTO record.utilisateurs(nom_utilisateur, mdp_utilisateur, mail_utilisateur) VALUES (:nom,:mdp,:mail)');
-        $requete->bindValue(':', $_POST[''], PDO::PARAM_STR);
-        $requete->bindValue(':', $_POST[''], PDO::PARAM_STR);
-        $requete->bindValue(':', $_POST[''], PDO::PARAM_STR);
+        $requete->bindValue(':nom', $_POST['nom_compte'], PDO::PARAM_STR);
+        $requete->bindValue(':mdp', $_POST['mdp_compte'], PDO::PARAM_STR);
+        $requete->bindValue(':mail', $_POST['mail_compte'], PDO::PARAM_STR);
         if ($requete->execute()) {
             return array('resultat' => true, 'message' => 'réussite');
         } else {
@@ -39,7 +41,7 @@ class utilisateur extends ModelParent
      */
     public function supprimerUtilisateur($id)
     {
-        $requete = $this->dbRecord->prepare('DELETE FROM record.utilisateurs WHERE id_utilisateur=:id');
+        $requete = $this->dbRecord->prepare('DELETE FROM record.utilisateurs WHERE utilisateur_id=:id');
         $requete->bindValue(':id', $id, PDO::PARAM_INT);
         if ($requete->execute()) {
             return array('resultat' => true, 'message' => 'réussite');
@@ -52,11 +54,11 @@ class utilisateur extends ModelParent
      * ajout du token timestamp en bdd
      * @return array
      */
-    public function tokenMdp()
+    public function tokenMdp($time)
     {
-        $requete = $this->dbRecord->prepare('UPDATE record.utilisateurs SET utilisateurs.token_recup=:token WHERE utilisateurs.nom_utilisateur=:nom ');
-        $requete->bindValue(':mail', $_POST[''], PDO::PARAM_STR);
-        $requete->bindValue(':token', $_POST[''], PDO::PARAM_STR);
+        $requete = $this->dbRecord->prepare('UPDATE record.utilisateurs SET utilisateurs.token_recup=:token WHERE utilisateurs.mail_utilisateur=:mail ');
+        $requete->bindValue(':mail', $_POST['mail_compte'], PDO::PARAM_STR);
+        $requete->bindValue(':token', $time, PDO::PARAM_STR);
         if ($requete->execute()) {
             return array('resultat' => true, 'message' => 'réussite');
         } else {
@@ -69,24 +71,24 @@ class utilisateur extends ModelParent
      * verification si nom exite déjà en bdd
      * @return mixed
      */
-    public function chercherNom()
+    public function chercherMail()
     {
-        $requete = $this->dbRecord->prepare('SELECT * FROM record.utilisateurs WHERE utilisateurs.mail_utilisateur=:mail');
-        $requete->bindValue(':nom', $_POST[''], PDO::PARAM_STR);
-        $resultat = $requete->execute();
-        return $resultat;
+        $requete = $this->dbRecord->prepare('SELECT COUNT(*) as mailbdd FROM record.utilisateurs WHERE utilisateurs.mail_utilisateur=:mail');
+        $requete->bindValue(':mail', $_POST['mail_compte'], PDO::PARAM_STR);
+        $requete->execute();
+        return $resultat = $requete->fetch(PDO::FETCH_OBJ);
     }
 
     /**
      * vérification si mail existe déjà en bdd
      * @return mixed
      */
-    public function chercherMail()
+    public function chercherNom()
     {
-        $requete = $this->dbRecord->prepare('SELECT * FROM record.utilisateurs WHERE utilisateurs.mail_utilisateur=:mail');
-        $requete->bindValue(':mail', $_POST[''], PDO::PARAM_STR);
-        $resultat = $requete->execute();
-        return $resultat;
+        $requete = $this->dbRecord->prepare('SELECT COUNT(*) as nombdd FROM record.utilisateurs WHERE utilisateurs.nom_utilisateur=:nom');
+        $requete->bindValue(':nom', $_POST['nom_compte'], PDO::PARAM_STR);
+        $requete->execute();
+        return $resultat = $requete->fetch(PDO::FETCH_OBJ);
 
     }
 
@@ -97,10 +99,11 @@ class utilisateur extends ModelParent
      */
     public function connexionUtilisateur()
     {
-        $requete = $this->dbRecord->prepare('SELECT * FROM record.utilisateurs WHERE utilisateurs.nom_utilisateur=:nom AND utilisateurs.mdp_utilisateur=:mdp');
-        $requete->bindValue(':nom', $_POST[''], PDO::PARAM_STR);
-        $requete->bindValue(':mdp', $_POST[''], PDO::PARAM_STR);
-        $resultat = $requete->execute();
+        $requete = $this->dbRecord->prepare('SELECT utilisateurs.mdp_utilisateur as mdp FROM record.utilisateurs WHERE utilisateurs.nom_utilisateur=:nom AND utilisateurs.mail_utilisateur=:mail');
+        $requete->bindValue(':nom', $_POST['nom_compte'], PDO::PARAM_STR);
+        $requete->bindValue(':mail', $_POST['mail_compte'], PDO::PARAM_STR);
+        $requete->execute();
+        $resultat=$requete->fetch(PDO::FETCH_OBJ);
         return $resultat;
 
     }

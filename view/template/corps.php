@@ -18,13 +18,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid ">
             <a class="navbar-brand text-title" href="#"><u><b>Velvet Record</b></u></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse mr-1" id="navbarNav">
                 <ul class="navbar-nav">
                     <li>
-                        <a class="nav-link text-light" role="button" href="/" title="lien vers l'accueil de Velvet Record"><i
+                        <a class="nav-link text-light" role="button" href="/"
+                           title="lien vers l'accueil de Velvet Record"><i
                                     class="fas fa-home"></i> Accueil</a>
                     </li>
                 </ul>
@@ -34,33 +36,52 @@
                            title="Accès à la liste des diques"><i class="fas fa-compact-disc"></i> liste des disques</a>
                     </li>
                 </ul>
-                    <ul class="navbar-nav">
-                        <li>
-                            <a class="nav-link text-light" href="/utilisateurs/formulaire_connexion"
-                               title="Accès à la liste des diques"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li>
-                            <a class="nav-link text-light" href="/utilisateurs/creer_compte"
-                               title="Accès à la liste des diques"><i class="fas fa-user-circle"></i> Créer un
-                                compte</a>
-                        </li>
-                    </ul>
-                </div>
+                <?php if(!isset($_SESSION) AND !isset($_SESSION['nom']) or empty($_SESSION)){ ?>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link text-light" href="/utilisateurs/formulaire_connexion"
+                           title="Accès à la liste des diques"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link text-light" href="/utilisateurs/creer_compte"
+                           title="Accès à la liste des diques"><i class="fas fa-user-circle"></i> Créer un
+                            compte</a>
+                    </li>
+                </ul>
+                <?php }
+                elseif (isset($_SESSION) AND isset($_SESSION['nom'])){
+                ?>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link text-light" href="/utilisateurs/se_deconnecter"
+                           title="Accès à la liste des diques"><i class="fas fa-sign-in-alt"></i> Se déconnecter</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link text-light" href=""
+                           title="Accès à la liste des diques"><i class="fas fa-user-circle"></i><?= $_SESSION['nom'] ?> : mon compte </a>
+                    </li>
+                </ul>
+                <?php
+                }
+                ?>
+                ?>
+            </div>
         </div>
     </nav>
 </header>
 <!--les container et d-flex-->
 <!--<div class="container">-->
-    <div class="d-md-flex justify-content-center">
+<div class="d-md-flex justify-content-center">
 
 
+    <?= $contenu ?>
 
-<?= $contenu ?>
-
-        <!--fermeture des div ouvertes dans le header-->
-    </div>
+    <!--fermeture des div ouvertes dans le header-->
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
