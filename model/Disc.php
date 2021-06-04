@@ -22,12 +22,20 @@ class Disc extends ModelParent
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
 
+    /**
+     * fonction qui retourne le nombre de disques dans la bdd
+     * @return mixed
+     */
     public function compterDisque()
     {
         $requete = $this->dbRecord->query('SELECT COUNT(*) as compteur FROM record.' . $this->table);
         return $requete->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * fonction qui ajoute un disque dans la bdd
+     * @return array
+     */
     public function ajouterDisque()
     {
         $requete = $this->dbRecord->prepare('INSERT INTO record.disc(disc_title, disc_year, disc_picture, disc_label, disc_genre, disc_price, artist_id) VALUES (:titre, :annee, :image, :label, :genre, :prix, :artiste)');
@@ -46,6 +54,11 @@ class Disc extends ModelParent
     }
 
 
+    /**
+     * fonction qui modifie un disque en bdd (sauf image)
+     * @param $id
+     * @return array
+     */
     public function modifDisque($id)
     {
         $requete = $this->dbRecord->prepare('UPDATE record.disc SET disc_title=:titre, disc_year = :annee, disc_label=:label, disc_genre=:genre, disc_price=:prix, artist_id=:artiste WHERE disc_id=:id');
@@ -64,7 +77,11 @@ class Disc extends ModelParent
         }
     }
 
-
+    /**
+     * fonction qui modifie l'image en bdd
+     * @param $id
+     * @return array
+     */
         public function modifImage($id)
         {
             $requete=$this->dbRecord->prepare('UPDATE record.disc SET disc_picture=:image WHERE disc_id=:id');
@@ -79,6 +96,11 @@ class Disc extends ModelParent
 
         }
 
+    /**
+     * fonction qui supprime un disque de la bdd
+     * @param $id
+     * @return array
+     */
         public function supprimerDisque($id){
         $requete=$this->dbRecord->prepare('DELETE FROM record.disc WHERE disc_id=:id');
         $requete->bindValue(':id',$id,PDO::PARAM_INT);

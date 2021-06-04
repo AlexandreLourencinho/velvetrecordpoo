@@ -1,5 +1,5 @@
 <?php
-if($disqueDetail===false){
+if(isset($disqueDetail) AND $disqueDetail===false AND $aff===false){
     header('location: /disques/listeDisques');
 }
 if($aff===false){
@@ -87,10 +87,24 @@ elseif($aff===true){
     ?>
     <div class="d-flex flex-column align-items-center">
         <h1 class="alert alert-success"> Modification réussie</h1>
-        <a href="/" class="btn btn-outline-info" title="retournez à la liste des disques">Retour à la liste des disques</a>
+        <a href="/disques/listeDisques" class="btn btn-outline-info" title="retournez à la liste des disques">Retour à la liste des disques</a>
         <p class="text-light">Vous allez être redirigé dans <span id="compteur">5</span> secondes...</p>
-    </div>
+
     <script src="/assets/javaScript/scripts.js"></script>
+    <?php
+    if(isset($image) AND $image['resultat']===false){
+        ?>
+        <h1>attention : une erreur est survenue lors de la gestion de l'image. La résolution est peut-être trop grande.</h1>
+            <?php
+    }elseif(isset($image) AND $image['resultat']===true){
+        ?>
+        <p class="text-success">L'image a bien été modifée.</p>
+            <?php
+    }else{
+        echo '';
+    }
+    ?>
+    </div>
     <?php
     header("refresh: 5; url=/disques/listeDisques");
 }

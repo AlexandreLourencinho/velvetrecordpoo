@@ -21,6 +21,6 @@
     <div class="d-flex flex-column mt-3 col-12">
         <button type="submit" class="btn btn-success mb-1 align-self-center col-12" name="envoi"> S'inscrire</button>
         <a href="/" class=" text-center btn btn-dark mb-1">retour a l'accueil</a>
-        <a href="/disques/listeDisques" class=" text-center btn btn-dark mb-1">retour à la liste des disques</a>
+        <a href="/disques/listeDisques" class=" text-center btn btn-info mb-1">retour à la liste des disques</a>
     </div>
 </form>

@@ -8,14 +8,19 @@ a.text-info:hover {
     color: aliceblue !important;
 }
 
-/*taille des images*/
-img.coverimage {
-    width: 50% !important;
+a.text-title{
+    color: #ebffe5!important;
 }
 
+/*taille des images*/
+/*img.coverimage {*/
+/*    width: 50% !important;*/
+/*}*/
+
 img{
-    width :100% !important;
+    width: 100% !important;
 }
+
 
 td{
     background-color: rgba(0,0,0,0.8) !important;

@@ -4,7 +4,9 @@
 class utilisateur extends ModelParent
 {
 
-
+    /**
+     * utilisateur constructor.
+     */
     public function __construct()
     {
         //définie la table sur disc
@@ -14,6 +16,7 @@ class utilisateur extends ModelParent
     }
 
     /**
+     * creation de compte utilisateur
      * @return array
      */
     public function ajoutUtilisateur()
@@ -30,6 +33,7 @@ class utilisateur extends ModelParent
     }
 
     /**
+     * suppression d'un utilisateur
      * @param $id
      * @return array
      */
@@ -45,6 +49,7 @@ class utilisateur extends ModelParent
     }
 
     /**
+     * ajout du token timestamp en bdd
      * @return array
      */
     public function tokenMdp()
@@ -61,6 +66,7 @@ class utilisateur extends ModelParent
     }
 
     /**
+     * verification si nom exite déjà en bdd
      * @return mixed
      */
     public function chercherNom()
@@ -72,6 +78,7 @@ class utilisateur extends ModelParent
     }
 
     /**
+     * vérification si mail existe déjà en bdd
      * @return mixed
      */
     public function chercherMail()
@@ -85,6 +92,7 @@ class utilisateur extends ModelParent
 
 
     /**
+     * si retourne un résultat autre que false, utilisateur existe => démarrage session
      * @return mixed
      */
     public function connexionUtilisateur()
@@ -99,18 +107,19 @@ class utilisateur extends ModelParent
 
 
     /**
+     * fonction qui permet de changer le mdp => passer le token en paramètre
      * @param $token
      * @return array
      */
-    public function changerMdp($token){
+    public function changerMdp($token)
+    {
         $requete = $this->dbRecord->prepare('UPDATE record.utilisateurs SET utilisateurs.mdp_utilisateur=:mdp WHERE utilisateurs.token_recup=:token');
-        $requete->bindValue(':mdp',$_POST[''],PDO::PARAM_STR);
-        $requete->bindValue(':token',$token,PDO::PARAM_STR);
-        if($requete->execute()){
-            return array('resultat'=>true,'message'=>'réussite');
-        }
-        else{
-            return array('resultat'=>false,'message'=>'échec');
+        $requete->bindValue(':mdp', $_POST[''], PDO::PARAM_STR);
+        $requete->bindValue(':token', $token, PDO::PARAM_STR);
+        if ($requete->execute()) {
+            return array('resultat' => true, 'message' => 'réussite');
+        } else {
+            return array('resultat' => false, 'message' => 'échec');
         }
     }
 
