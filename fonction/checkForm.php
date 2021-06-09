@@ -51,4 +51,19 @@ class checkForm
         return $erreurs;
     }
 
+    public function checkFormMdp(){
+        $erreurs=[];
+        if($_POST['mdp_compte']!=$_POST['mdp_compte_verif']){
+            $erreurs['mdp_compte_verif']='les mots de passe sont différents';
+        }
+        if(strlen($_POST['mdp_compte'])<8){
+            $erreurs['mdp_compte']='Le mot de passe doit contenir au moins 8 caractères';
+        }
+        if(!preg_match('#^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$#',$_POST['mdp_compte'])){
+            $erreurs['mdp_compte']='Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre';
+        }
+        return $erreurs;
+
+    }
+
 }

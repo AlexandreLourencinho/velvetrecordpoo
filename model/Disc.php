@@ -53,7 +53,6 @@ class Disc extends ModelParent
         }
     }
 
-
     /**
      * fonction qui modifie un disque en bdd (sauf image)
      * @param $id
@@ -70,10 +69,9 @@ class Disc extends ModelParent
         $requete->bindValue(':prix', $_POST['prix'], PDO::PARAM_STR);
         $requete->bindValue(':id', $id, PDO::PARAM_INT);
         if ($requete->execute()) {
-            return array('resultat'=>true,'message'=>'réussite');
-        }
-        else{
-            return array('resultat'=>false,'message'=>'échec');
+            return array('resultat' => true, 'message' => 'réussite');
+        } else {
+            return array('resultat' => false, 'message' => 'échec');
         }
     }
 
@@ -82,37 +80,41 @@ class Disc extends ModelParent
      * @param $id
      * @return array
      */
-        public function modifImage($id)
-        {
-            $requete=$this->dbRecord->prepare('UPDATE record.disc SET disc_picture=:image WHERE disc_id=:id');
-            $requete->bindValue(':image', $_POST['image'], PDO::PARAM_STR);
-            $requete->bindValue(':id', $id, PDO::PARAM_INT);
-            if($requete->execute()){
-                return array('resultat'=>true, 'message'=>'modif image réussie');
-            }
-            else{
-                return array('resultat'=>false, 'message'=>'echec de l\'insertiondu doigt dans le petit' );
-            }
-
+    public function modifImage($id)
+    {
+        $requete = $this->dbRecord->prepare('UPDATE record.disc SET disc_picture=:image WHERE disc_id=:id');
+        $requete->bindValue(':image', $_POST['image'], PDO::PARAM_STR);
+        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        if ($requete->execute()) {
+            return array('resultat' => true, 'message' => 'modif image réussie');
+        } else {
+            return array('resultat' => false, 'message' => 'echec de l\'insertiondu doigt dans le petit');
         }
+
+    }
 
     /**
      * fonction qui supprime un disque de la bdd
      * @param $id
      * @return array
      */
-        public function supprimerDisque($id){
-        $requete=$this->dbRecord->prepare('DELETE FROM record.disc WHERE disc_id=:id');
-        $requete->bindValue(':id',$id,PDO::PARAM_INT);
-            if($requete->execute()){
-                return array('resultat'=>true, 'message'=>'réussite de la suppression');
-            }
-            else{
-                return array('resultat'=>false, 'message'=>'echec de la suppression' );
-            }
+    public function supprimerDisque($id)
+    {
+        $requete = $this->dbRecord->prepare('DELETE FROM record.disc WHERE disc_id=:id');
+        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        if ($requete->execute()) {
+            return array('resultat' => true, 'message' => 'réussite de la suppression');
+        } else {
+            return array('resultat' => false, 'message' => 'echec de la suppression');
         }
+    }
 
 
-
+    public function __destruct(){
 
     }
+
+
+
+
+}

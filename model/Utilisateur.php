@@ -16,7 +16,6 @@ class Utilisateur extends ModelParent
     }
 
 
-
     /**
      * creation de compte utilisateur
      * @return array
@@ -103,7 +102,7 @@ class Utilisateur extends ModelParent
         $requete->bindValue(':nom', $_POST['nom_compte'], PDO::PARAM_STR);
         $requete->bindValue(':mail', $_POST['mail_compte'], PDO::PARAM_STR);
         $requete->execute();
-        $resultat=$requete->fetch(PDO::FETCH_OBJ);
+        $resultat = $requete->fetch(PDO::FETCH_OBJ);
         return $resultat;
 
     }
@@ -117,13 +116,36 @@ class Utilisateur extends ModelParent
     public function changerMdp($token)
     {
         $requete = $this->dbRecord->prepare('UPDATE record.utilisateurs SET utilisateurs.mdp_utilisateur=:mdp WHERE utilisateurs.token_recup=:token');
-        $requete->bindValue(':mdp', $_POST[''], PDO::PARAM_STR);
+        $requete->bindValue(':mdp', $_POST['mdp_compte'], PDO::PARAM_STR);
         $requete->bindValue(':token', $token, PDO::PARAM_STR);
         if ($requete->execute()) {
             return array('resultat' => true, 'message' => 'réussite');
         } else {
             return array('resultat' => false, 'message' => 'échec');
         }
+    }
+
+
+    public function tokenUtilisateur($token)
+    {
+        $requete = $this->dbRecord->prepare('SELECT COUNT(*) as tokenrecup FROM record.utilisateurs WHERE utilisateurs.token_recup=:token');
+        $requete->bindValue(':token', $token, PDO::PARAM_INT);
+        $requete->execute();
+        return $resultat = $requete->fetch(PDO::FETCH_OBJ);
+    }
+
+
+
+    public function supprimerToken($token){
+        $requete = $this->dbRecord->prepare('UPDATE record.utilisateurs SET utilisateurs.token_recup=NULL WHERE utilisateurs.token_recup=:token');
+        $requete->bindValue(':token',$token,PDO::PARAM_STR);
+        if($requete->execute()){
+            return array('resultat'=>true,'message'=>'réussite');
+        }
+        else{
+            return array('resultat'=>false,'message'=>'échec');
+        }
+
     }
 
 

@@ -9,7 +9,7 @@ class Utilisateurs extends AbstractController
     public function formulaire_connexion()
     {
         $aff = false;
-        if(isset($_SESSION) and isset($_SESSION['nom']) AND $aff===false){
+        if (isset($_SESSION) and isset($_SESSION['nom']) and $aff === false) {
             header('location: /disques/listeDisques');
         }
         if (isset($_SESSION['nom'])) {
@@ -38,6 +38,12 @@ class Utilisateurs extends AbstractController
                     'aff' => $aff
                 ]);
             }
+            else{
+                $this->afficher('se_connecter',[
+                    'message'=>'le mot de passe est incorrect.',
+                    'aff'=>$aff
+                ]);
+            }
         }
     }
 
@@ -46,17 +52,17 @@ class Utilisateurs extends AbstractController
      */
     public function recup_mdp()
     {
-        $aff=false;
+        $aff = false;
         if (!isset($_POST['envoi'])) {
-            $this->afficher('mdp_oublie', ['aff'=>$aff]);
+            $this->afficher('mdp_oublie', ['aff' => $aff]);
         } elseif (isset($_POST['envoi'])) {
             $utilisateurs = $this->chargerModel('Utilisateur');
             $resultatmail = $utilisateurs->chercherMail();
-//            var_dump($resultatmail);
+
             if ($resultatmail->mailbdd == 0) {
                 $this->afficher('mdp_oublie', [
                     'message' => 'Le compte associé à cette adresse éléctronique n\'a pas été trouvée.',
-                    'aff'=>$aff
+                    'aff' => $aff
                 ]);
             } elseif ($resultatmail->mailbdd == 1) {
                 $date = new DateTime();
@@ -65,9 +71,9 @@ class Utilisateurs extends AbstractController
                 if ($token['resultat'] === true) {
                     mail($_POST['mail_compte'], "récupération de mdp", "utilisez ce lien: http://localhost:8005/utilisateurs/changerMdp/" . $time,
                         array('From' => 'velvet@record.fr', 'Reply-To' => 'mail@placeholder.fr', 'X-Mailer' => 'PHP/' . phpversion()));
-                    $aff=true;
-                    $this->afficher('mdp_oublie',[
-                        'aff'=>$aff
+                    $aff = true;
+                    $this->afficher('mdp_oublie', [
+                        'aff' => $aff
                     ]);
                 }
             }
@@ -147,21 +153,76 @@ class Utilisateurs extends AbstractController
     }
 
 
-
-    public function changerMdp($token=null){
-        if(!isset($token)){
-            $this->afficher('changer_mdp',[
-                'token'=>$token,
-                'message'=>'lien expiré'
+    public function changerMdp($tokenrecup = null)
+    {
+        $aff = false;
+        if (!isset($tokenrecup) or $tokenrecup === '') {
+            $this->afficher('changer_mdp', [
+                'message' => 'lien expiré',
+                'aff' => $aff
             ]);
-        }
-        elseif(isset($token)){
-            $this->afficher('changer_mdp',[
-                'token'=>$token
-            ]);
-        }
-        elseif(isset($token) AND isset($_POST['envoi'])){
 
+        } elseif (isset($tokenrecup) and !isset($_POST['envoi'])) {
+            $this->afficher('changer_mdp', [
+                'token' => $tokenrecup,
+                'aff' => $aff
+            ]);
+        } elseif (isset($tokenrecup) and isset($_POST['envoi'])) {
+            $token = intval($tokenrecup);
+            $utilisateurs = $this->chargerModel('Utilisateur');
+            $recherchetoken = $utilisateurs->tokenUtilisateur($tokenrecup);
+            if ($recherchetoken->tokenrecup != 1) {
+                $this->afficher('changer_mdp', [
+                    'message' => 'lien expiré',
+                    'aff' => $aff
+                ]);
+            } elseif ($recherchetoken->tokenrecup == 1) {
+                $form = $this->chargerFonction('checkForm');
+                $erreurs = $form->checkFormMdp();
+                var_dump($erreurs);
+                $date = new DateTime();
+                $datejour = new DateTime();
+                $datetoken = $datejour->setTimestamp($tokenrecup);
+                var_dump($date);
+                var_dump($datetoken);
+
+                $interval = $date->diff($datetoken, true);
+                var_dump($interval);
+
+                //test si lien expiré
+                $testminutes = intval($interval->format('%i'));
+                $testheures = intval($interval->format('%h'));
+                $testjours = intval($interval->format('%d'));
+                $testmois = intval($interval->format('%m'));
+                $testannee = intval($interval->format('%y'));
+                var_dump($testminutes);
+                var_dump($testheures);
+//                die;
+                if ($testminutes >= 15 and $testheures > 1 and $testjours >= 1 and $testmois >= 1 and $testannee >= 1) {
+                    $this->afficher('changer_mdp', [
+                        'aff' => $aff,
+                        'message' => 'lien expiré'
+                    ]);
+                } elseif (count($erreurs) != 0) {
+                    $this->afficher('changer_mdp', [
+                        'erreurs' => $erreurs,
+                        'aff' => $aff
+                    ]);
+                } elseif (count($erreurs) === 0 and $testminutes <= 15 and $testheures <= 1 and $testjours < 1 and $testmois < 1 and $testannee < 1) {
+                    $_POST['mdp_compte']=password_hash($_POST['mdp_compte'],PASSWORD_DEFAULT);
+                    $changermdp = $utilisateurs->changerMdp($tokenrecup);
+                    if ($changermdp['resultat'] === true) {
+                        $aff = true;
+                        $del = $utilisateurs->supprimerToken($tokenrecup);
+                        if ($del['resultat'] === true) {
+                            $this->afficher('changer_mdp', [
+                                'aff' => $aff,
+
+                            ]);
+                        }
+                    }
+                }
+            }
         }
     }
 

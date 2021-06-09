@@ -4,6 +4,8 @@
 class Disques extends AbstractController
 {
 
+//    public array $tableTypesMimes = array("image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/x-png", "image/tiff", "image/bmp", "image/gif");
+
     /**
      * recupère liste des disques et charge l'affichage
      *
@@ -103,11 +105,11 @@ class Disques extends AbstractController
 
                 $disque = $this->chargerModel('Disc');
                 $resultat = $disque->ajouterDisque();
+                unset($_POST);
                 if ($resultat['resultat'] === false) {
                     echo "erreur lors de l'insertion";
                     $aff = false;
                     var_dump($resultat);
-                    var_dump($_POST);
                     $this->afficher('formulaire_ajout', ['artistes' => $truc,
                         'resultat' => $resultat, 'aff' => $aff
                     ]);
