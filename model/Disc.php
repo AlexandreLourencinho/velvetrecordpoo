@@ -1,5 +1,8 @@
 <?php
 
+//namespace LesModels;
+
+//use LesApp\ModelParent;
 
 class Disc extends ModelParent
 {

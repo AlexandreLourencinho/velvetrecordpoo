@@ -1,9 +1,7 @@
 <?php
-
 //abstract class = on ne peut pas faire new classe pour l'instancier : elle ne sera que dépendante d'une classe fille
 abstract class AbstractController
 {
-
     /**
      * fonction qui sert a appeler les model correspondants
      * @param string $model
@@ -25,7 +23,6 @@ abstract class AbstractController
         require_once ROOT . "/fonction/" . $fonction . ".php";
         return new $fonction;
     }
-
 
     /**
      * methode générant l'affichage

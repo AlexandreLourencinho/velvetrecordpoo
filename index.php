@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 //rooter qui permet d'aller dans tel ou tel controller ou methode
 
 
@@ -21,7 +20,7 @@ if ($parametres[1] != '') {
 
     // on recupère son nom ; ça sera le nom de la classe
     $classe = ucfirst($parametres[1]);
-    $methode = isset($parametres[2]) ? $parametres[2] : 'index';
+    $methode = $parametres[2] ?? 'index';
 
 
     if (file_exists(ROOT . "/controller/" . $classe . ".php")) {

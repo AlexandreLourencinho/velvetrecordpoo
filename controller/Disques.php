@@ -1,5 +1,10 @@
 <?php
 
+//namespace LesControllers;
+
+//use LesApp\AbstractController;
+
+
 //abstract controller parce que gestion de la vue
 class Disques extends AbstractController
 {
