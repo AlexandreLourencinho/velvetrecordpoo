@@ -35,7 +35,7 @@ CREATE TABLE disc (
 	FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
-create table record.droits
+create table droits
 (
     id_droit     int auto_increment
         primary key,
@@ -45,7 +45,7 @@ create table record.droits
         unique (niveau_droit)
 );
 
-create table record.utilisateurs
+create table utilisateurs
 (
     id_utilisateur   int auto_increment
         primary key,
@@ -86,8 +86,8 @@ INSERT INTO disc (disc_id, disc_title, disc_year, disc_picture, disc_label, disc
 ;
 
 
-insert into record.droits (id_droit, niveau_droit, label_droit) values (1, 1, 'droits admin');
+insert into droits (id_droit, niveau_droit, label_droit) values (1, 1, 'droits admin');
 
 
-insert into record.utilisateurs (utilisateur_id, nom_utilisateur, mdp_utilisateur, mail_utilisateur, id_droits) values (1, 'admin', '$2y$10$la4QXT63ueDHF1zeaG5Xnux9yCwaxbBXASOufSzlNSZ/QE8E0L932
+insert into utilisateurs (utilisateur_id, nom_utilisateur, mdp_utilisateur, mail_utilisateur, id_droits) values (1, 'admin', '$2y$10$la4QXT63ueDHF1zeaG5Xnux9yCwaxbBXASOufSzlNSZ/QE8E0L932
 ', 'alexandre.lourencinho@gmail.com', null);
